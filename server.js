@@ -22,7 +22,6 @@ app.get("/v1/colours-code", function (req, res) {
   const COLOURS_RANGE = 256;
   const TOTAL_STEPS = 32;
   const colourCodeArr = [];
-  const limit = req.query.limit;
   let totalCount = 0;
   let defaultValue = parseInt(COLOURS_RANGE / TOTAL_STEPS);
 
@@ -38,15 +37,14 @@ app.get("/v1/colours-code", function (req, res) {
       }
     }
   }
-
-  const updatedColourCodeArr = colourCodeArr.slice(0, limit);
-
   res.send({
     responseCode: 200,
     responseMessage: "success",
-    response: updatedColourCodeArr,
+    response: colourCodeArr,
     total: totalCount,
   });
 });
 
 app.listen(PORT);
+
+module.exports = app;
